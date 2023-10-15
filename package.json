@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "vite",
+    "dev": "node readcards.js && vite",
+    "build-game": "node readcards.js && vite build",
+    "build-cards": "cp -r cards dist/cards && node readcards.js",
     "build": "run-p type-check build-only",
     "preview": "vite preview",
     "build-only": "vite build",
