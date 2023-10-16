@@ -3,24 +3,27 @@
         <div class="Card">
 
             <div class="CardText">
-                <h1>{{ card.name }}</h1>
-                <h2 class="Question">
-                    <pre>{{ card.question }}</pre>
-                </h2>
+                <button class="Audio" @click="playCard"><img src="/images/audio.png" /></button>
+                <h1>{{ card.question }}</h1>
             </div>
 
-            <div class="CardImage" v-if="card.image">
-                <!-- Card Image -->
-                <img :src="image" @click="playAudio" class="CardImage">
+            <div class="Options">
+                <div v-for="option,index in options">
+                    <button class="Audio" v-if="option.audio" @click="playOption(option)"><img
+                            src="/images/audio.png" /></button>
+                    <button @click="tryAnswer(index,option)" :class="option.classes">
+                        ({{ letters[(option.index-1)] }}) {{ option.text }}
+                    </button>
+                </div>
             </div>
 
         </div>
 
-        <div class="Options">
-            <button @click="tryAnswer(index+1, option)" v-for="option,index in options" :class="['Option', option.opened ? option.className:'']">
-                ({{letters[index]}}) {{ option.answer }}
-            </button>
+        <div class="CardImage" v-if="card.image">
+            <!-- Card Image -->
+            <img :src="image" @click="playCard" class="CardImage">
         </div>
+
     </div>
 </template>
 
@@ -29,14 +32,15 @@ import store from "$/store.js";
 
 export default {
     data() {
-        let options = [];
-        store.card.options.map((item,index) => {
-            options.push({answer: item, opened: false, className: (index+1) == store.card.answer ? "Right" : "Wrong" });
+        let options = store.card.options.map(option => {
+            return {
+                classes: ['Option'],
+                ...option
+            };
         });
-
         return {
-            letters: ['A','B','C','D','E','F','G'],
-            options
+            options: options,
+            letters: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
         };
     },
 
@@ -67,11 +71,15 @@ export default {
     },
 
     mounted() {
-        this.playAudio();
+        this.playCard();
     },
 
     methods: {
-        playAudio() {
+        playOption(option) {
+            store.playOption(option);
+        },
+
+        playCard() {
             store.playCardAudio();
         },
 
@@ -79,29 +87,41 @@ export default {
             return store.quitGame();
         },
 
-        tryAnswer(answer, option) {
-            option.opened = true;
+        tryAnswer(index,option) {
+            let tryOption = store.try(option);
+            this.options[index].classes.push(tryOption ? "Right" : "Wrong");
             console.log(option);
-            store.try(answer);
         }
     },
 }
 </script>
 
 <style scoped>
-.Translation {
-    color: blue;
+.Audio {
+    display: block;
+    float: left;
+    padding: 0px;
+    height: 46px;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-left: 0px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    z-index: 15;
 }
 
-.Comment {
-    color: red;
-    font-size: 25px;
+.Audio img {
+    height: 42px;
 }
 
 .CardBox {
     width: calc(100% - 200px);
     height: calc(100% - 120px);
     margin: auto;
+    padding-left: 15px;
+    padding-right: 15px;
     overflow: hidden;
     border: 4px dashed black;
     border-radius: 30px;
@@ -171,7 +191,8 @@ export default {
 .Options .Option {
     display: block;
     padding: 7px;
-    font-size: 16px;
+    font-size: 24px;
+    font-weight: bold;
     border-radius: 15px;
     cursor: pointer;
     margin-left: 0px;
@@ -188,6 +209,7 @@ export default {
     background-color: crimson;
     text-shadow: white 3px 0 10px;
     box-shadow: 3px 3px gray;
+    color: white;
 }
 
 pre {
