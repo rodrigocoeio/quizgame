@@ -7,7 +7,7 @@ export default {
         cover: false,
         audio: false,
         image: false,
-        name: false,
+        text: true,
         answer: false,
         options: [],
         pleaseSelectCategory: false

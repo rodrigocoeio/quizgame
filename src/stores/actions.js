@@ -119,6 +119,10 @@ export default {
     }
   },
 
+  toggleCardText() {
+    this.game.text = !this.game.text;
+  },
+
   try(option) {
     let store = this;
     if (this.card.answer == option.index) {

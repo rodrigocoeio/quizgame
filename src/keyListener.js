@@ -30,19 +30,9 @@ const listenKeyBoardEvents = function (e) {
       return store.playCardAudio();
     }
 
-    // Toggle Image
-    if (e.keyCode == 73 || e.keyCode == 80) {
-      return store.toggleCardImage();
-    }
-
     // Toggle Name
     if (e.keyCode == 78) {
-      return store.toggleCardName();
-    }
-
-    // Toggle Translation
-    if (e.keyCode == 84) {
-      return store.toggleCardTranslation();
+      return store.toggleCardText();
     }
 
     // Play card audio on space

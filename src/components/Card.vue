@@ -4,7 +4,8 @@
 
             <div class="CardText">
                 <button class="Audio" @click="playCard"><img src="/images/audio.png" /></button>
-                <h1>{{ card.question }}</h1>
+                <h1 v-if="game.text">{{ card.question }}</h1>
+                <h1 v-if="!game.text">...?</h1>
             </div>
 
             <div class="Options">
@@ -12,7 +13,8 @@
                     <button class="Audio" v-if="option.audio" @click="playOption(option)"><img
                             src="/images/audio.png" /></button>
                     <button @click="tryAnswer(index,option)" :class="option.classes">
-                        ({{ letters[(option.index-1)] }}) {{ option.text }}
+                        ({{ letters[(option.index-1)] }}) 
+                        <span v-if="game.text">{{ option.text }}</span>
                     </button>
                 </div>
             </div>

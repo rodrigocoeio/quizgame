@@ -61,12 +61,12 @@
                     </li> -->
 
                     <!-- Name Button -->
-                    <!-- <li class="nav-item">
-                        <button id="nameButton" title="Press N" :class="[game.name ? 'opened' : '']" :disabled="!card.name"
-                            @click="toggleName">
-                            <img src="/images/text.png" height="36">
+                    <li class="nav-item">
+                        <button id="textButton" title="Press N" :class="[game.text ? 'opened' : '']"
+                            @click="toggleText">
+                            <img src="/images/text.png" height="24">
                         </button>
-                    </li> -->
+                    </li>
 
                     <!-- Translation Button -->
                     <!-- <li class="nav-item">
@@ -137,32 +137,22 @@ export default {
 
     methods: {
         playAudio() {
-            $("#audioButton").trigger("blur");
+            //$("#audioButton").trigger("blur");
             store.playCardAudio();
         },
 
-        toggleImage() {
-            $("#imageButton").trigger("blur");
-            this.game.image = !this.game.image;
-        },
-
-        toggleName() {
-            $("#nameButton").trigger("blur");
-            this.game.name = !this.game.name;
-        },
-
-        toggleTranslation() {
-            $("#translationButton").trigger("blur");
-            this.game.translation = !this.game.translation;
+        toggleText() {
+            //$("#textButton").trigger("blur");
+            store.game.text = !store.game.text;
         },
 
         previousCard() {
-            $("#previousCardButton").trigger("blur");
+            //$("#previousCardButton").trigger("blur");
             store.previousCard();
         },
 
         nextCard() {
-            $("#nextCardButton").trigger("blur");
+            //$("#nextCardButton").trigger("blur");
             store.nextCard();
         },
 
