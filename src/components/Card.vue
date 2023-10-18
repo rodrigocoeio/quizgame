@@ -3,9 +3,9 @@
         <div class="Card">
 
             <div class="CardText">
-                <button class="Audio" @click="playCard"><img src="/images/audio.png" /></button>
-                <h1 v-if="game.text">{{ card.question }}</h1>
-                <h1 v-if="!game.text">...?</h1>
+                <button class="Audio" @click="playCard" v-if="card.audio"><img src="/images/audio.png" /></button>
+                <h1 v-if="game.text" @click="playCard">{{ card.question }}</h1>
+                <h1 v-if="!game.text" @click="playCard">...?</h1>
             </div>
 
             <div class="Options">
