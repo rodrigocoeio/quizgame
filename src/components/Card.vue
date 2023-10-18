@@ -124,7 +124,7 @@ export default {
     margin: auto;
     padding-left: 15px;
     padding-right: 15px;
-    overflow: hidden;
+    overflow: auto;
     border: 4px dashed black;
     border-radius: 30px;
     display: flex;
