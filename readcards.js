@@ -166,19 +166,26 @@ const getCard = (content, parent) => {
     const cardFileTextLines = cardFileText.split('\n')
 
     let cardName = getCardName(content.name)
-    let cardQuestion = ''
+    let cardQuestion = []
     let cardAnswer = ''
     let cardOptions = []
     if (cardFileTextLines.length > 1) {
-      cardQuestion = cardFileTextLines.shift()
-      cardAnswer = cardFileTextLines.shift()
+      while (cardAnswer == '' && cardFileTextLines.length > 0) {
+        let line = cardFileTextLines.shift()
+        if (line.length === 1 && parseInt(line) > 0) {
+          cardAnswer = line
+        } else {
+          cardQuestion.push(line)
+        }
+      }
 
-      let optionsIndex = 0;
+      let optionsIndex = 0
       cardOptions = cardFileTextLines.map((text) => {
-        optionsIndex++;
-        let optionAudioName = content.name+' - '+optionsIndex;
+        optionsIndex++
+        let optionAudioName = content.name + ' - ' + optionsIndex
         let optionAudio =
-          findCardFile(optionAudioName, parent, 'mp3') || findCardFile(optionAudioName, parent, 'mpeg')
+          findCardFile(optionAudioName, parent, 'mp3') ||
+          findCardFile(optionAudioName, parent, 'mpeg')
         return {
           index: optionsIndex,
           text: text,
@@ -205,7 +212,7 @@ const getCard = (content, parent) => {
       parent: content.parent,
       image: cardImage,
       audio: cardAudio,
-      question: cardQuestion,
+      question: cardQuestion.join("<br>"),
       answer: cardAnswer,
       options: cardOptions
     }

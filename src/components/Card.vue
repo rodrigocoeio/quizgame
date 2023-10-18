@@ -4,8 +4,8 @@
 
             <div class="CardText">
                 <button class="Audio" @click="playCard" v-if="card.audio"><img src="/images/audio.png" /></button>
-                <h1 v-if="game.text" @click="playCard">{{ card.question }}</h1>
-                <h1 v-if="!game.text" @click="playCard">...?</h1>
+                <h2 v-if="game.text" @click="playCard"><pre>{{ card.question }}</pre></h2>
+                <h2 v-if="!game.text" @click="playCard">...?</h2>
             </div>
 
             <div class="Options">
@@ -188,7 +188,7 @@ export default {
 
 .Options {
     min-width: 200px;
-    padding: 5px;
+    padding-right: 15px;
 }
 
 .Options .Option {
@@ -200,6 +200,7 @@ export default {
     cursor: pointer;
     margin-left: 0px;
     margin-bottom: 15px;
+    text-align: left;
 }
 
 .Options .Option.Right {
