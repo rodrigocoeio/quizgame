@@ -179,7 +179,7 @@ export default {
     margin: 0px;
     overflow: hidden;
     background-color: white;
-    color: black;
+    color: blue;
 }
 
 .Card h1 {
@@ -191,6 +191,7 @@ export default {
 
 .Card h2 {
     font-size: 30px;
+    font-weight: bold;
     margin: 0px;
 }
 
@@ -204,15 +205,22 @@ export default {
 }
 
 .Options .Option {
+    background-color: ghostwhite;
     display: block;
     padding: 7px;
-    font-size: 24px;
+    font-size: 30px;
     font-weight: bold;
     border-radius: 15px;
     cursor: pointer;
     margin-left: 0px;
     margin-bottom: 15px;
     text-align: left;
+}
+
+.Options .Option:hover {
+    background-color: gainsboro;
+    text-shadow: white 3px 0 10px;
+    box-shadow: 3px 3px gray;
 }
 
 .Options .Option.Right {
