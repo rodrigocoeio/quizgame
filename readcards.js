@@ -172,8 +172,9 @@ const getCard = (content, parent) => {
     if (cardFileTextLines.length > 1) {
       while (cardAnswer == '' && cardFileTextLines.length > 0) {
         let line = cardFileTextLines.shift()
-        if (line.length === 1 && parseInt(line) > 0) {
-          cardAnswer = line
+        if (parseInt(line) > 0) {
+          cardAnswer = parseInt(line);
+          break;
         } else {
           cardQuestion.push(line)
         }
@@ -212,7 +213,7 @@ const getCard = (content, parent) => {
       parent: content.parent,
       image: cardImage,
       audio: cardAudio,
-      question: cardQuestion.join("<br>"),
+      question: cardQuestion.join(""),
       answer: cardAnswer,
       options: cardOptions
     }
