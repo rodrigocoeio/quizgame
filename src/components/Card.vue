@@ -72,6 +72,18 @@ export default {
         }
     },
 
+    watch: {
+        card: function(card) {
+            let options = card.options.map(option => {
+                return {
+                    classes: ['Option'],
+                    ...option
+                };
+            });
+            this.options = options;
+        }
+    },
+
     mounted() {
         this.playCard();
     },
