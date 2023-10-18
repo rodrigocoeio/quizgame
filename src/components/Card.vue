@@ -188,6 +188,7 @@ export default {
 
 .Options {
     min-width: 200px;
+    padding: 5px;
 }
 
 .Options .Option {
